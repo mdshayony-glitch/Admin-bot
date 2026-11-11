@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brain AI Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080e1c;color:#edf3ff;
+ font-family:Arial,sans-serif
+}
+header{
+ padding:20px;background:#111c32;
+ border-bottom:1px solid #263858;
+ display:flex;justify-content:space-between;
+ align-items:center
+}
+.logo{font-size:22px;font-weight:bold;color:#42a5ff}
+.container{max-width:1100px;margin:auto;padding:18px}
+.welcome{font-size:23px;margin:15px 0}
+.grid{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:12px
+}
+.card{
+ background:linear-gradient(145deg,#172944,#101a30);
+ border:1px solid #284466;border-radius:14px;
+ padding:18px;margin-bottom:14px
+}
+.label{color:#9aacc9;font-size:13px}
+.value{font-size:25px;font-weight:bold;margin-top:10px}
+.blue{color:#43a9ff}
+.green{color:#31dda0}
+.menu{
+ display:grid;grid-template-columns:repeat(2,1fr);
+ gap:12px
+}
+.menu button{
+ background:#142743;border:1px solid #31517b;
+ color:white;padding:19px 8px;border-radius:12px;
+ font-size:14px
+}
+.menu button:active{background:#245b9d}
+.section{margin-top:25px}
+.notice{
+ background:#172b43;padding:15px;
+ border-radius:10px;color:#b6c9e8;
+ font-size:13px;line-height:1.6
+}
+footer{text-align:center;color:#7488a8;padding:25px}
+@media(min-width:650px){
+ .grid{grid-template-columns:repeat(4,1fr)}
+ .menu{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">BRAIN AI</div>
+ <div>● ONLINE</div>
+</header>
+
+<main class="container">
+ <div class="welcome">Welcome to Dashboard</div>
+
+ <div class="grid">
+  <div class="card">
+   <div class="label">ACCOUNT</div>
+   <div class="value blue">FREE</div>
+  </div>
+  <div class="card">
+   <div class="label">USER STATUS</div>
+   <div class="value green">ACTIVE</div>
+  </div>
+  <div class="card">
+   <div class="label">ANALYSIS</div>
+   <div class="value">00</div>
+  </div>
+  <div class="card">
+   <div class="label">DATA SOURCE</div>
+   <div class="value blue">LIVE</div>
+  </div>
+ </div>
+
+ <div class="section">
+  <h3>MARKET ANALYSIS</h3>
+  <div class="menu">
+   <button onclick="openPage('OTC Analyzer')">OTC Analyzer</button>
+   <button onclick="openPage('Real Analyzer')">Real Analyzer</button>
+   <button onclick="openPage('Live Analysis')">Live Analysis</button>
+   <button onclick="openPage('Future Analysis')">Future Analysis</button>
+   <button onclick="openPage('News Analysis')">News Analysis</button>
+   <button onclick="openPage('Profile')">My Profile</button>
+  </div>
+ </div>
+
+ <div class="section card">
+  <h3 id="pageTitle">Dashboard Overview</h3>
+  <div id="pageContent" class="notice">
+   Welcome! Select an analysis section above.
+   <br><br>
+   This platform provides educational market analysis.
+   It does not guarantee trading results.
+  </div>
+ </div>
+
+ <div class="notice">
+  Educational demo only. Market analysis is not a
+  financial recommendation.
+ </div>
+</main>
+
+<footer>BRAIN AI © 2026</footer>
+
+<script>
+function openPage(name){
+ document.getElementById("pageTitle").textContent=name;
+ document.getElementById("pageContent").textContent=
+ name+" section selected. Educational demo interface.";
+}
+</script>
+</body>
+</html>
