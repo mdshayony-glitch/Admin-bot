@@ -1270,3 +1270,10 @@ if (token) {
 def admin_dashboard():
 
     return HTMLResponse(DASHBOARD_HTML)
+
+
+from fastapi.responses import FileResponse
+
+@app.get("/dashboard")
+def user_dashboard():
+    return FileResponse("backend/dashboard.html")
