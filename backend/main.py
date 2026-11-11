@@ -13,7 +13,7 @@ from contextlib import contextmanager
 import bcrypt
 import requests
 from fastapi import FastAPI, HTTPException, Depends, Header
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from pydantic import BaseModel, EmailStr, Field
 
 from indicators import analyze
