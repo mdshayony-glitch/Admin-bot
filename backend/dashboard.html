@@ -3,619 +3,424 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#071329">
-<title>Brain Max AI Premium</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market AI Pro</title>
 <style>
 :root{
- --bg:#050b19;
- --panel:#0c1930;
- --panel2:#112442;
- --border:#203d65;
- --blue:#398bff;
- --cyan:#40d5ff;
- --green:#31dda0;
- --red:#ff607d;
- --text:#edf5ff;
- --muted:#91a5c4;
+ --bg:#080d18;--panel:#111b2d;--panel2:#0c1728;
+ --line:#263751;--text:#eaf2ff;--muted:#91a5c2;
+ --blue:#42bfff;--green:#36dda0;--red:#ff737f;
+ --yellow:#ffd36b;
 }
 *{box-sizing:border-box}
 body{
  margin:0;background:var(--bg);color:var(--text);
- font-family:Arial,sans-serif;
+ font-family:Arial,sans-serif;min-height:100vh;
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
 header{
- height:68px;position:sticky;top:0;z-index:20;
+ height:65px;padding:0 17px;background:#0e192b;
+ border-bottom:1px solid var(--line);
  display:flex;align-items:center;justify-content:space-between;
- padding:0 17px;background:#07142af2;
- border-bottom:1px solid var(--border);
- backdrop-filter:blur(15px);
+ position:sticky;top:0;z-index:10;
 }
-.logo{
- font-size:20px;font-weight:900;letter-spacing:1px;
- background:linear-gradient(90deg,#fff,#45aaff,#5ce0ff);
- color:transparent;background-clip:text;
+.logo{font-size:19px;font-weight:800;color:var(--blue)}
+.header-right{display:flex;align-items:center;gap:12px}
+.status{font-size:11px;color:var(--green)}
+.icon-btn{
+ background:#1a2940;color:white;border:1px solid var(--line);
+ border-radius:9px;padding:9px 12px;
 }
-.online{font-size:11px;color:var(--green)}
-.container{max-width:1150px;margin:auto;padding:17px}
-h2{font-size:21px}
-h3{font-size:16px}
-small,.muted{color:var(--muted)}
+.container{max-width:1200px;margin:auto;padding:17px}
 .card{
- background:linear-gradient(145deg,#122747,#0b172c);
- border:1px solid var(--border);
- border-radius:17px;padding:17px;
- box-shadow:0 8px 25px #0003;
- margin-bottom:14px;
+ background:linear-gradient(145deg,#121e32,#0e192a);
+ border:1px solid var(--line);border-radius:14px;
+ padding:16px;margin-bottom:15px;
 }
-.grid{
- display:grid;grid-template-columns:repeat(2,1fr);
- gap:11px;
+h2{font-size:17px;margin:0 0 14px}
+h3{font-size:13px;color:var(--muted);margin:0 0 8px}
+p{line-height:1.55}
+.muted{font-size:12px;color:var(--muted);line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--panel2);padding:13px;border-radius:10px}
+.stat small{font-size:11px;color:var(--muted)}
+.stat strong{display:block;font-size:19px;margin-top:8px}
+label{font-size:12px;color:var(--muted);display:block}
+input,select{
+ width:100%;padding:12px;margin:7px 0 13px;
+ border-radius:8px;background:#091525;
+ border:1px solid #30425d;color:white;outline:none;
 }
-.stat-label{font-size:11px;color:var(--muted)}
-.stat-value{font-size:24px;font-weight:bold;margin-top:12px}
-.blue{color:var(--cyan)}
-.green{color:var(--green)}
-.red{color:var(--red)}
-.section{margin-top:25px}
-.section-title{
- display:flex;justify-content:space-between;
- align-items:center;margin-bottom:13px;
+.primary{
+ background:linear-gradient(100deg,#087acb,#26a9e9);
+ color:white;border:0;border-radius:9px;
+ padding:12px 16px;font-weight:bold;
 }
-.nav{
- display:grid;grid-template-columns:repeat(3,1fr);
- gap:8px;margin:18px 0;
+.secondary{
+ background:#1b2c46;color:white;border:1px solid var(--line);
+ border-radius:9px;padding:10px 13px;
 }
-.nav button,.action{
- background:#122747;border:1px solid var(--border);
- color:white;border-radius:11px;padding:13px 5px;
- font-size:12px;
+.full{width:100%}
+.tabs{
+ display:flex;gap:7px;overflow-x:auto;margin-bottom:15px;
 }
-.nav button.active{
- background:linear-gradient(110deg,#236bdb,#168bc7);
- border-color:#53bfff;
- box-shadow:0 0 16px #278cff55;
+.tabs button{
+ background:#17263d;color:#b7c8df;
+ border:1px solid var(--line);padding:11px 14px;
+ border-radius:9px;white-space:nowrap;
 }
-.page{display:none;animation:appear .3s ease}
-.page.active{display:block}
-@keyframes appear{
- from{opacity:0;transform:translateY(8px)}
+.tabs button.active{background:#087acb;color:white}
+.page{animation:fade .25s ease}
+.hidden{display:none!important}
+@keyframes fade{
+ from{opacity:0;transform:translateY(7px)}
  to{opacity:1;transform:translateY(0)}
 }
-@keyframes glow{
- 0%,100%{box-shadow:0 0 7px #318bff22}
- 50%{box-shadow:0 0 23px #318bff66}
+@keyframes pulse{
+ 0%,100%{opacity:1}
+ 50%{opacity:.45}
 }
-.hero{
- padding:22px;border-radius:20px;
- background:linear-gradient(120deg,#153b70,#102347,#10203c);
- border:1px solid #3263a0;
- animation:glow 4s infinite;
+.live-dot{
+ display:inline-block;width:8px;height:8px;
+ background:var(--green);border-radius:50%;
+ animation:pulse 1.5s infinite;
 }
-.hero-title{font-size:25px;font-weight:bold}
-.hero p{font-size:13px;color:#b8d1f5;line-height:1.6}
-.btn{
- background:linear-gradient(100deg,#2675ef,#27b4ed);
- border:0;color:white;padding:13px 17px;
- border-radius:11px;font-weight:bold;
+.market-chart{
+ height:210px;background:#091525;border-radius:10px;
+ display:flex;align-items:center;justify-content:center;
+ border:1px solid #1c304b;
 }
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-secondary{
- background:#172e50;border:1px solid var(--border);
- color:white;padding:12px;border-radius:10px;
-}
-.tabs{display:flex;gap:8px;margin:15px 0}
-.tabs button{
- flex:1;padding:12px;border-radius:10px;
- background:#10213c;border:1px solid var(--border);
- color:white;font-size:12px;
-}
-.tabs button.active{
- background:#236fcb;border-color:#55b9ff;
-}
-.input{
- width:100%;padding:14px;background:#08152b;
- color:white;border:1px solid var(--border);
- border-radius:10px;outline:none;margin:7px 0;
-}
-.input:focus{border-color:var(--cyan)}
-.pairs{
- display:grid;grid-template-columns:repeat(2,1fr);
- gap:9px;margin-top:14px;
-}
-.pair{
- display:flex;align-items:center;gap:8px;
- padding:13px 9px;background:#0b1b34;
- border:1px solid var(--border);
- color:white;border-radius:11px;text-align:left;
-}
-.pair.selected{border-color:var(--cyan);background:#12315a}
-.flag{font-size:21px}
-.pair-name{font-size:12px;flex:1}
-.badge{
- font-size:9px;padding:4px 6px;
- border-radius:5px;background:#183a61;color:#76d6ff;
-}
-.row{
- display:flex;justify-content:space-between;
- align-items:center;gap:10px;
-}
-.indicator{
- padding:13px 0;border-bottom:1px solid #203650;
- display:flex;justify-content:space-between;
- font-size:13px;
-}
-.indicator:last-child{border:0}
-.result{
- background:#08172d;border:1px solid var(--border);
- border-radius:13px;padding:16px;margin-top:14px;
-}
-.result pre{
+#result{
+ background:#091525;border:1px solid #263751;
+ padding:13px;border-radius:9px;
  white-space:pre-wrap;overflow-wrap:anywhere;
- font-size:11px;color:#b9d8ff;
+ font-size:12px;line-height:1.6;min-height:100px;
 }
-.upload{
- display:block;padding:25px 12px;text-align:center;
- border:1px dashed #458acb;border-radius:14px;
- background:#0a1b35;color:#b9d9ff;
+.green{color:var(--green)}
+.red{color:var(--red)}
+.yellow{color:var(--yellow)}
+#menu{
+ position:absolute;right:12px;top:58px;
+ background:#142239;border:1px solid var(--line);
+ border-radius:10px;padding:10px;z-index:20;width:165px;
 }
-.upload input{max-width:100%;margin-top:12px}
-#preview{
- max-width:100%;max-height:300px;
- display:none;margin:15px auto;border-radius:12px;
-}
-.notice{
- font-size:12px;line-height:1.7;
- padding:13px;background:#102441;
- border-radius:11px;color:#adc6e6;
-}
-.list-item{
- padding:13px 0;border-bottom:1px solid #203650;
- font-size:13px;
-}
-.bottom{
- position:sticky;bottom:0;z-index:15;
- display:flex;justify-content:space-around;
- background:#08152bf2;border-top:1px solid var(--border);
- padding:11px 3px;
- backdrop-filter:blur(12px);
-}
-.bottom button{
- border:0;background:none;color:#9cb5d8;
- font-size:10px;
-}
-.bottom button.active{color:#55bdff}
-footer{text-align:center;padding:25px;color:#607898;font-size:11px}
-.hidden{display:none!important}
-@media(min-width:650px){
- .grid{grid-template-columns:repeat(4,1fr)}
- .pairs{grid-template-columns:repeat(3,1fr)}
- .nav{grid-template-columns:repeat(6,1fr)}
- .container{padding:25px}
+#menu button{display:block;width:100%;margin:4px 0}
+footer{text-align:center;color:#667b98;font-size:11px;padding:20px}
+@media(min-width:750px){
+ .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .two-col{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
- <div class="logo">✦ BRAIN MAX AI</div>
- <div class="online">● SYSTEM READY</div>
+ <div class="logo">◈ MARKET AI PRO</div>
+ <div class="header-right">
+  <span class="status"><span class="live-dot"></span> API STATUS</span>
+  <button class="icon-btn" onclick="toggleMenu()">⋮</button>
+ </div>
+ <div id="menu" class="hidden">
+  <button class="secondary full" onclick="showPage('profile')">My Profile</button>
+  <button class="secondary full" onclick="logout()">Logout</button>
+ </div>
 </header>
 
-<main class="container">
+<div class="container">
 
 <!-- LOGIN -->
-<section id="loginPage" class="page">
- <div class="card" style="max-width:430px;margin:40px auto">
-  <h2>✦ Welcome Back</h2>
-  <p class="muted">Login to Brain Max AI</p>
-  <input class="input" id="email" type="email" placeholder="Email">
-  <input class="input" id="password" type="password" placeholder="Password">
-  <button class="btn" style="width:100%" onclick="login()">LOGIN</button>
-  <p id="loginMessage" class="muted"></p>
- </div>
+<section id="loginPanel" class="card">
+ <h2>Welcome Back</h2>
+ <p class="muted">Sign in to your Market AI account.</p>
+ <label>Email Address</label>
+ <input id="email" type="email" placeholder="Enter email">
+ <label>Password</label>
+ <input id="password" type="password" placeholder="Enter password">
+ <button class="primary full" onclick="login()">LOGIN</button>
+ <p id="loginMessage" class="muted"></p>
 </section>
 
-<!-- APP -->
-<div id="app" class="hidden">
+<!-- DASHBOARD -->
+<section id="appPanel" class="hidden">
 
-<div class="hero">
- <div class="hero-title">Welcome to Brain Max AI</div>
- <p>Advanced technical market analytics platform</p>
- <div class="row">
-  <span class="badge">PREMIUM INTERFACE</span>
-  <span class="online">● Connected UI</span>
- </div>
-</div>
+ <nav class="tabs">
+  <button class="active" onclick="showPage('home',this)">Home</button>
+  <button onclick="showPage('market',this)">Markets</button>
+  <button onclick="showPage('analysis',this)">Analysis</button>
+  <button onclick="showPage('screenshot',this)">Screenshot</button>
+  <button onclick="showPage('news',this)">News</button>
+  <button onclick="showPage('profile',this)">Profile</button>
+ </nav>
 
-<nav class="nav">
- <button class="active" onclick="page('home',this)">⌂ Home</button>
- <button onclick="page('market',this)">🌐 Market</button>
- <button onclick="page('analysis',this)">✦ Analysis</button>
- <button onclick="page('screenshot',this)">▧ Screenshot</button>
- <button onclick="page('future',this)">◷ Future</button>
- <button onclick="page('profile',this)">👤 Profile</button>
-</nav>
-
-<!-- HOME -->
-<section id="home" class="page active">
- <div class="section-title">
-  <h2>Dashboard Overview</h2>
-  <span class="badge">ACCOUNT</span>
- </div>
- <div class="grid">
+ <!-- HOME -->
+ <section id="home" class="page">
   <div class="card">
-   <div class="stat-label">ACCOUNT PLAN</div>
-   <div class="stat-value blue">USER</div>
-  </div>
-  <div class="card">
-   <div class="stat-label">ACCOUNT STATUS</div>
-   <div class="stat-value green" id="userStatus">CHECK</div>
-  </div>
-  <div class="card">
-   <div class="stat-label">ANALYSIS COUNT</div>
-   <div class="stat-value" id="count">00</div>
-  </div>
-  <div class="card">
-   <div class="stat-label">MARKET DATA</div>
-   <div class="stat-value blue">API</div>
-  </div>
- </div>
-
- <div class="section">
-  <h3>QUICK ACCESS</h3>
-  <div class="grid">
-   <button class="action" onclick="page('market')">🌐 Live Market</button>
-   <button class="action" onclick="page('analysis')">📊 Indicators</button>
-   <button class="action" onclick="page('screenshot')">▧ Screenshot</button>
-   <button class="action" onclick="page('future')">◷ Future Trends</button>
-  </div>
- </div>
-
- <div class="section card">
-  <h3>Platform Information</h3>
-  <div class="notice">
-   Brain Max AI provides technical market analysis.
-   No prediction is guaranteed. Always verify data
-   and evaluate uncertainty.
-  </div>
- </div>
-</section>
-
-<!-- MARKET -->
-<section id="market" class="page">
- <h2>🌐 Market Selection</h2>
- <div class="tabs">
-  <button class="active" onclick="marketTab('live',this)">LIVE MARKET</button>
-  <button onclick="marketTab('otc',this)">OTC MARKET</button>
- </div>
- <div id="liveMarket">
-  <input class="input" id="pairSearch" placeholder="Search currency pair..." oninput="searchPairs()">
-  <div class="pairs" id="pairs"></div>
-  <div class="card selection">
-   <div class="stat-label">SELECTED MARKET</div>
-   <div class="row">
-    <strong id="selectedPair">BTCUSDT</strong>
-    <span class="badge">BINANCE</span>
+   <h2>Market Overview</h2>
+   <p class="muted">Data-driven educational market analytics</p>
+   <div class="grid">
+    <div class="stat"><small>ACCOUNT ROLE</small><strong id="role">—</strong></div>
+    <div class="stat"><small>DATA STATUS</small><strong id="connection">—</strong></div>
+    <div class="stat"><small>MARKET TYPE</small><strong>Multi</strong></div>
+    <div class="stat"><small>ANALYSIS</small><strong>Ready</strong></div>
    </div>
-   <div class="tabs">
-    <button onclick="setIntervalValue('1m',this)">1M</button>
-    <button class="active" onclick="setIntervalValue('5m',this)">5M</button>
-    <button onclick="setIntervalValue('15m',this)">15M</button>
-    <button onclick="setIntervalValue('1h',this)">1H</button>
-    <button onclick="setIntervalValue('4h',this)">4H</button>
-    <button onclick="setIntervalValue('1d',this)">1D</button>
+  </div>
+
+  <div class="card">
+   <h2>Selected Market</h2>
+   <div class="stat">
+    <small>SYMBOL</small>
+    <strong id="homeSymbol">BTCUSDT</strong>
+    <p class="muted">Choose a market to view its analysis.</p>
    </div>
-   <button class="btn" style="width:100%" onclick="runAnalysis()">LOAD MARKET DATA</button>
   </div>
- </div>
 
- <div id="otcMarket" class="hidden">
-  <div class="notice">
-   OTC data source is not connected. OTC prices are
-   different from public Binance market prices.
-   Select an authorized, verified OTC data provider
-   before enabling real OTC analysis.
+  <div class="card">
+   <h2>System Information</h2>
+   <p class="muted">Market information is shown only when a verified data source is connected. No fabricated live prices or accuracy scores.</p>
   </div>
- </div>
+ </section>
+
+ <!-- MARKETS -->
+ <section id="market" class="page hidden">
+  <div class="card">
+   <h2>Select Market</h2>
+
+   <label>Market Category</label>
+   <select id="marketType" onchange="marketChanged()">
+    <option value="crypto">Crypto — Binance Spot</option>
+    <option value="forex">Forex — Provider required</option>
+    <option value="stocks">Stocks — Provider required</option>
+    <option value="otc">OTC — Verified source required</option>
+   </select>
+
+   <label>Trading Symbol</label>
+   <select id="symbol" onchange="updateHomeSymbol()">
+    <option>BTCUSDT</option>
+    <option>ETHUSDT</option>
+    <option>BNBUSDT</option>
+    <option>SOLUSDT</option>
+    <option>XRPUSDT</option>
+    <option>DOGEUSDT</option>
+    <option>ADAUSDT</option>
+    <option>TRXUSDT</option>
+    <option>LINKUSDT</option>
+    <option>AVAXUSDT</option>
+   </select>
+
+   <label>Timeframe</label>
+   <select id="interval">
+    <option value="1m">1 Minute</option>
+    <option value="2m">2 Minutes</option>
+    <option value="5m">5 Minutes</option>
+    <option value="15m">15 Minutes</option>
+    <option value="30m">30 Minutes</option>
+    <option value="1h">1 Hour</option>
+    <option value="4h">4 Hours</option>
+    <option value="1d">1 Day</option>
+   </select>
+
+   <button class="primary full" onclick="runAnalysis()">RUN ANALYSIS</button>
+   <p id="marketMessage" class="muted"></p>
+  </div>
+ </section>
+
+ <!-- ANALYSIS -->
+ <section id="analysis" class="page hidden">
+  <div class="card">
+   <h2>Market Analysis</h2>
+   <p id="analysisInfo" class="muted">Select a market first.</p>
+   <div class="market-chart">
+    <span class="muted">Chart data will appear here when chart API is connected.</span>
+   </div>
+  </div>
+
+  <div class="card">
+   <h2>Technical Indicators</h2>
+   <div class="grid">
+    <div class="stat"><small>RSI</small><strong id="rsi">—</strong></div>
+    <div class="stat"><small>MACD</small><strong id="macd">—</strong></div>
+    <div class="stat"><small>EMA</small><strong id="ema">—</strong></div>
+    <div class="stat"><small>ATR</small><strong id="atr">—</strong></div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h2>Analysis Result</h2>
+   <div id="result">No analysis loaded yet.</div>
+  </div>
+ </section>
+
+ <!-- SCREENSHOT -->
+ <section id="screenshot" class="page hidden">
+  <div class="card">
+   <h2>Screenshot Analysis</h2>
+   <p class="muted">Upload a chart screenshot to preview it. Actual AI analysis requires a connected image-analysis backend.</p>
+   <label>Select Chart Image</label>
+   <input type="file" id="chartImage" accept="image/*" onchange="previewImage()">
+   <img id="preview" class="hidden" style="width:100%;border-radius:10px;margin-top:10px">
+   <p id="imageMessage" class="muted"></p>
+  </div>
+ </section>
+
+ <!-- NEWS -->
+ <section id="news" class="page hidden">
+  <div class="card">
+   <h2>Market News Analysis</h2>
+   <p class="muted">News analysis will be available after a verified news API is connected.</p>
+   <div id="newsResult" class="stat">No news provider connected.</div>
+  </div>
+ </section>
+
+ <!-- PROFILE -->
+ <section id="profile" class="page hidden">
+  <div class="card">
+   <h2>My Profile</h2>
+   <div id="profileInfo" class="muted">Loading profile...</div>
+   <button class="secondary full" onclick="logout()">Logout</button>
+  </div>
+ </section>
+
 </section>
-
-<!-- ANALYSIS -->
-<section id="analysis" class="page">
- <h2>✦ Technical Analysis</h2>
- <div class="card">
-  <div class="row">
-   <span class="muted">Selected pair</span>
-   <strong id="analysisPair">BTCUSDT</strong>
-  </div>
-  <div class="row" style="margin-top:12px">
-   <span class="muted">Timeframe</span>
-   <strong id="analysisInterval">5m</strong>
-  </div>
-  <button class="btn" style="width:100%;margin-top:18px" onclick="runAnalysis()">RUN ANALYSIS</button>
- </div>
-
- <div class="card">
-  <h3>Indicator Results</h3>
-  <div id="indicators">
-   <p class="muted">Load real market data to see available indicators.</p>
-  </div>
- </div>
- <div class="notice">
-  Advanced indicators such as MACD, ADX, ATR,
-  VWAP and Supertrend will appear after their
-  calculations are implemented in the backend.
- </div>
-</section>
-
-<!-- SCREENSHOT -->
-<section id="screenshot" class="page">
- <h2>▧ Screenshot Analysis</h2>
- <div class="card">
-  <label class="upload">
-   <div style="font-size:30px">▧</div>
-   <strong>Upload Chart Screenshot</strong>
-   <p class="muted">Select PNG, JPG or WEBP image</p>
-   <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp">
-  </label>
-  <img id="preview" alt="Chart preview">
-  <div class="notice">
-   Image preview is available. Actual chart recognition
-   requires a secure image-analysis backend.
-  </div>
-  <button class="btn-secondary" style="width:100%;margin-top:12px" disabled>
-   IMAGE ANALYSIS — BACKEND REQUIRED
-  </button>
- </div>
-</section>
-
-<!-- FUTURE -->
-<section id="future" class="page">
- <h2>◷ Future Trend Analysis</h2>
- <div class="card">
-  <p class="muted">Market and timeframe</p>
-  <div class="row">
-   <strong id="futurePair">BTCUSDT</strong>
-   <span id="futureInterval">5m</span>
-  </div>
-  <button class="btn" style="width:100%;margin-top:18px" onclick="runAnalysis()">
-   ANALYZE CURRENT TREND
-  </button>
-  <div class="result">
-   <h3>Trend Information</h3>
-   <div id="futureResult">Load market data first.</div>
-  </div>
- </div>
- <div class="notice">
-  Future trend analysis is an estimate based on historical
-  data and technical indicators, not a guaranteed forecast.
- </div>
-</section>
-
-<!-- PROFILE -->
-<section id="profile" class="page">
- <h2>👤 My Profile</h2>
- <div class="card">
-  <div class="stat-label">LOGGED IN ACCOUNT</div>
-  <h3 id="profileEmail">Loading...</h3>
-  <div class="indicator">
-   <span>Role</span><strong id="profileRole">-</strong>
-  </div>
-  <div class="indicator">
-   <span>Status</span><strong id="profileStatus">-</strong>
-  </div>
-  <button class="btn-secondary" style="width:100%;margin-top:17px" onclick="logout()">
-   LOG OUT
-  </button>
- </div>
-</section>
-
-</div>
-</main>
-
-<div class="bottom" id="bottomNav">
- <button class="active" onclick="page('home')">⌂<br>HOME</button>
- <button onclick="page('market')">🌐<br>MARKET</button>
- <button onclick="page('analysis')">✦<br>ANALYSIS</button>
- <button onclick="page('screenshot')">▧<br>IMAGE</button>
- <button onclick="page('profile')">👤<br>PROFILE</button>
 </div>
 
-<footer>BRAIN MAX AI © 2026<br>Independent market analytics</footer>
+<footer>MARKET AI PRO • Educational Market Analytics • No guaranteed predictions</footer>
 
 <script>
-const API = "";
-let token = localStorage.getItem("admin_token") || "";
-let selectedPair = "BTCUSDT";
-let selectedInterval = "5m";
-let analysisCount = 0;
-let lastData = null;
+const API="";
+let token=localStorage.getItem("admin_token")||"";
 
-const markets = [
- ["BTCUSDT","₿","Bitcoin"],
- ["ETHUSDT","Ξ","Ethereum"],
- ["BNBUSDT","🟡","BNB"],
- ["SOLUSDT","🟣","Solana"],
- ["XRPUSDT","✕","XRP"],
- ["ADAUSDT","🔵","Cardano"],
- ["DOGEUSDT","🐕","Dogecoin"],
- ["TRXUSDT","🔴","TRON"],
- ["LTCUSDT","⚪","Litecoin"],
- ["DOTUSDT","🔴","Polkadot"],
- ["LINKUSDT","🔗","Chainlink"],
- ["AVAXUSDT","🔺","Avalanche"]
-];
-
-function page(name,button){
- document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
- document.getElementById(name).classList.add("active");
- document.querySelectorAll(".nav button,.bottom button").forEach(x=>x.classList.remove("active"));
- if(button)button.classList.add("active");
- document.getElementById("bottomNav").classList.remove("hidden");
- if(name==="analysis")syncSelection();
- if(name==="future")syncSelection();
+function toggleMenu(){
+ document.getElementById("menu").classList.toggle("hidden");
 }
 
-function syncSelection(){
- document.getElementById("analysisPair").textContent=selectedPair;
- document.getElementById("analysisInterval").textContent=selectedInterval;
- document.getElementById("futurePair").textContent=selectedPair;
- document.getElementById("futureInterval").textContent=selectedInterval;
-}
-
-function renderPairs(filter=""){
- const box=document.getElementById("pairs");
- box.innerHTML="";
- markets.filter(x=>(x[0]+" "+x[2]).toLowerCase().includes(filter.toLowerCase()))
- .forEach(m=>{
-  const b=document.createElement("button");
-  b.className="pair"+(selectedPair===m[0]?" selected":"");
-  b.innerHTML='<span class="flag">'+m[1]+'</span><span class="pair-name">'+m[2]+'</span><span class="badge">USDT</span>';
-  b.onclick=()=>{
-   selectedPair=m[0];
-   document.getElementById("selectedPair").textContent=selectedPair;
-   syncSelection();
-   renderPairs(document.getElementById("pairSearch").value);
-  };
-  box.appendChild(b);
- });
-}
-
-function searchPairs(){
- renderPairs(document.getElementById("pairSearch").value);
-}
-
-function setIntervalValue(value,button){
- selectedInterval=value;
+function showPage(id,btn){
+ document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
  document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
- button.classList.add("active");
- syncSelection();
+ if(btn)btn.classList.add("active");
+ if(id==="profile")showProfile();
 }
 
-function marketTab(type,button){
- document.querySelectorAll("#market .tabs button").forEach(b=>b.classList.remove("active"));
- button.classList.add("active");
- document.getElementById("liveMarket").classList.toggle("hidden",type!=="live");
- document.getElementById("otcMarket").classList.toggle("hidden",type!=="otc");
-}
-
-async function api(path,method="GET",body=null){
- const headers={};
- if(token)headers.Authorization="Bearer "+token;
- if(body)headers["Content-Type"]="application/json";
- const response=await fetch(API+path,{
-  method,headers,
-  body:body?JSON.stringify(body):null
- });
- const data=await response.json().catch(()=>({}));
+async function request(path,options={}){
+ const headers={...(options.headers||{})};
+ if(token)headers["Authorization"]="Bearer "+token;
+ if(options.body)headers["Content-Type"]="application/json";
+ const response=await fetch(API+path,{...options,headers});
+ const data=await response.json().catch(()=>({detail:"Invalid response"}));
  if(!response.ok)throw new Error(data.detail||"Request failed");
  return data;
 }
 
 async function login(){
  const message=document.getElementById("loginMessage");
- message.textContent="Signing in...";
+ message.textContent="Checking account...";
  try{
-  const data=await api("/login","POST",{
-   email:document.getElementById("email").value,
-   password:document.getElementById("password").value
+  const data=await request("/login",{
+   method:"POST",
+   body:JSON.stringify({
+    email:document.getElementById("email").value.trim(),
+    password:document.getElementById("password").value
+   })
   });
-  token=data.access_token;
+  token=data.access_token||data.token||"";
+  if(!token)throw new Error("Login token not received");
   localStorage.setItem("admin_token",token);
-  await startApp();
+  await loadApp();
  }catch(e){
   message.textContent=e.message;
  }
 }
 
-async function startApp(){
+async function loadApp(){
  try{
-  const user=await api("/admin/api/me");
-  if(!["admin","superadmin"].includes(user.role))
-   throw new Error("Admin account required for this current API.");
-
-  document.getElementById("loginPage").classList.remove("active");
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-  document.getElementById("profileEmail").textContent=user.email;
-  document.getElementById("profileRole").textContent=user.role;
-  document.getElementById("profileStatus").textContent=user.status;
-  document.getElementById("userStatus").textContent=user.status.toUpperCase();
+  const me=await request("/admin/api/me");
+  document.getElementById("loginPanel").classList.add("hidden");
+  document.getElementById("appPanel").classList.remove("hidden");
+  document.getElementById("role").textContent=me.role||"User";
+  document.getElementById("connection").textContent="Connected";
+  document.getElementById("profileInfo").textContent=JSON.stringify(me,null,2);
  }catch(e){
-  token="";
   localStorage.removeItem("admin_token");
-  document.getElementById("loginPage").classList.remove("hidden");
-  document.getElementById("loginPage").classList.add("active");
+  token="";
+  document.getElementById("loginPanel").classList.remove("hidden");
+  document.getElementById("appPanel").classList.add("hidden");
   document.getElementById("loginMessage").textContent=e.message;
  }
 }
 
-async function runAnalysis(){
- const indicatorBox=document.getElementById("indicators");
- indicatorBox.innerHTML='<p class="blue">Loading verified market data...</p>';
- try{
-  const data=await api(
-   "/admin/api/market-analysis?symbol="+encodeURIComponent(selectedPair)+
-   "&interval="+encodeURIComponent(selectedInterval)
-  );
-  lastData=data;
-  analysisCount++;
-  document.getElementById("count").textContent=String(analysisCount).padStart(2,"0");
-  indicatorBox.innerHTML="";
-  const values=data.indicators||{};
-  Object.entries(values).forEach(([name,value])=>{
-   const row=document.createElement("div");
-   row.className="indicator";
-   const left=document.createElement("span");
-   left.textContent=name.toUpperCase();
-   const right=document.createElement("strong");
-   right.textContent=value===null?"Insufficient data":
-    typeof value==="object"?JSON.stringify(value):
-    typeof value==="number"?value.toFixed(4):String(value);
-   row.append(left,right);
-   indicatorBox.appendChild(row);
-  });
-  const future=document.getElementById("futureResult");
-  future.textContent="Historical data loaded. Review the indicators and trend; no guaranteed future direction is available.";
-  document.querySelector("#future .result").style.display="block";
-  syncSelection();
-  page("analysis");
- }catch(e){
-  indicatorBox.textContent="Analysis error: "+e.message;
+function marketChanged(){
+ const type=document.getElementById("marketType").value;
+ const message=document.getElementById("marketMessage");
+ if(type!=="crypto"){
+  message.textContent="A verified "+type.toUpperCase()+" data provider must be connected before live analysis.";
+ }else{
+  message.textContent="Crypto data source: Binance Spot API.";
  }
 }
 
-document.getElementById("imageInput").addEventListener("change",event=>{
- const file=event.target.files[0];
+function updateHomeSymbol(){
+ document.getElementById("homeSymbol").textContent=
+ document.getElementById("symbol").value;
+}
+
+async function runAnalysis(){
+ const symbol=document.getElementById("symbol").value;
+ const interval=document.getElementById("interval").value;
+ const output=document.getElementById("result");
+
+ showPage("analysis",document.querySelectorAll(".tabs button")[2]);
+ document.getElementById("analysisInfo").textContent=symbol+" • "+interval;
+ output.textContent="Loading verified market data...";
+
+ try{
+  const data=await request(
+   "/admin/api/market-analysis?symbol="+encodeURIComponent(symbol)+
+   "&interval="+encodeURIComponent(interval)
+  );
+  output.textContent=JSON.stringify(data,null,2);
+
+  const indicators=data.indicators||data.analysis||{};
+  document.getElementById("rsi").textContent=indicators.rsi??"—";
+  document.getElementById("macd").textContent=indicators.macd??"—";
+  document.getElementById("ema").textContent=indicators.ema??"—";
+  document.getElementById("atr").textContent=indicators.atr??"—";
+ }catch(e){
+  output.textContent="Analysis unavailable: "+e.message;
+ }
+}
+
+function previewImage(){
+ const file=document.getElementById("chartImage").files[0];
  if(!file)return;
- if(!["image/png","image/jpeg","image/webp"].includes(file.type)){
-  alert("Please select a PNG, JPG or WEBP image.");
+ if(!file.type.startsWith("image/")){
+  alert("Please select an image.");
   return;
  }
+ const url=URL.createObjectURL(file);
  const preview=document.getElementById("preview");
- preview.src=URL.createObjectURL(file);
- preview.style.display="block";
-});
+ preview.src=url;
+ preview.classList.remove("hidden");
+ document.getElementById("imageMessage").textContent=
+ "Preview ready. AI analysis backend is not connected yet.";
+}
 
-async function logout(){
- try{await api("/logout","POST")}catch(e){}
- token="";
+async function showProfile(){
+ try{
+  const me=await request("/admin/api/me");
+  document.getElementById("profileInfo").textContent=JSON.stringify(me,null,2);
+ }catch(e){
+  document.getElementById("profileInfo").textContent=e.message;
+ }
+}
+
+function logout(){
  localStorage.removeItem("admin_token");
+ token="";
  location.reload();
 }
 
-renderPairs();
-syncSelection();
-
-if(token)startApp();
-else{
- document.getElementById("loginPage").classList.remove("hidden");
- document.getElementById("loginPage").classList.add("active");
-}
+if(token)loadApp();
 </script>
 </body>
 </html>
